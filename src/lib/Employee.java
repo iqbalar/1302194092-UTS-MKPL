@@ -23,27 +23,20 @@ public class Employee {
 	}
 	private String gender;
 	
-	private int monthlySalary;
-	private int otherMonthlyIncome;
-	private int annualDeductible;
-	
-	private String spouseName;
-	private String spouseIdNumber;
-
 	private List<String> childNames;
 	private List<String> childIdNumbers;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, String gender) {
-		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.idNumber = idNumber;
-		this.address = address;
+	public Employee(Bio bio) {
+		this.employeeId = bio.GetemployeeId;
+		this.firstName = bio.GetfirstName;
+		this.lastName = bio.GetlastName;
+		this.idNumber = bio.GetidNumber;
+		this.address = bio.Getaddress;
 
-		this.isForeigner = isForeigner;
-		this.gender = gender;
+		this.isForeigner = bio.GetisForeigner;
+		this.gender = bio.Getgender;
 		
-		this.entryJoined = LocalDate.parse(yearJoined+"-"+monthJoined+"-"+dayJoined, DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+		this.entryJoined = LocalDate.parse(bio.yearJoined+"-"+bio.monthJoined+"-"+bio.dayJoined, DateTimeFormatter.ofPattern("yyyy-mm-dd"));
 
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
@@ -73,6 +66,13 @@ public class Employee {
 		}
 	}
 	
+	private int monthlySalary;
+	private int otherMonthlyIncome;
+	private int annualDeductible;
+	
+	private String spouseName;
+	private String spouseIdNumber;
+
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
 	}
