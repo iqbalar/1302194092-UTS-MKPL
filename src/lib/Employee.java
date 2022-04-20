@@ -1,7 +1,7 @@
 package lib;
 
 import java.time.LocalDate;
-import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,9 +14,7 @@ public class Employee {
 	private String idNumber;
 	private String address;
 	
-	private int yearJoined;
-	private int monthJoined;
-	private int dayJoined;
+	private LocalDate entryJoined;
 	private int monthWorkingInYear;
 	
 	private boolean isForeigner;
@@ -41,12 +39,12 @@ public class Employee {
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
+
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 		
+		this.entryJoined = LocalDate.parse(yearJoined+"-"+monthJoined+"-"+dayJoined, DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
 	}
@@ -98,8 +96,8 @@ public class Employee {
 		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 		
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		if (date.getYear() == entryJoined.getYear()) {
+			monthWorkingInYear = date.getMonthValue() - entryJoined.getMonthValue();
 		}else {
 			monthWorkingInYear = 12;
 		}
